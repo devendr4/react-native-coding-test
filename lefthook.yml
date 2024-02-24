@@ -1,0 +1,20 @@
+pre-commit:
+  parallel: true
+  commands:
+    validate_env:
+      run: yarn run validate:env:dev
+    eslint:
+      run: yarn run lint:check
+    prettier:
+      run: yarn run prettier:check
+
+pre-push:
+  parallel: false
+  commands:
+    eslint:
+      run: yarn run lint:check
+    prettier:
+      run: yarn run prettier:check
+    compiler:
+      glob: "*.{js,ts,jsx,tsx}"
+      run: yarn run tsc
