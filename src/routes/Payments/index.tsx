@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { ActivityIndicator, ScrollView, Text, View } from "dripsy";
-import { Button } from "react-native";
+import { useCallback, useState } from "react";
+import { Button, RefreshControl } from "react-native";
 
 import { API_URL } from "@/app";
 import { PaymentsList } from "@/components/PaymentList";
@@ -10,10 +11,25 @@ import { User } from "@/types";
 export const PaymentsRoute = () => {
   const { data, refetch, isLoading } = useQuery({
     queryKey: ["orders"],
-    queryFn: () => fetch(API_URL).then(res => res.json() as unknown as User),
+
+    // can be changed for 789.json or 500.json to test the other cases, alongside the pull to refresh feature
+    queryFn: () =>
+      fetch(API_URL + "/789.json").then(res => res.json() as unknown as User),
   });
+
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    refetch().then(() => {
+      setRefreshing(false);
+    });
+  }, [refetch]);
   return (
-    <ScrollView sx={{ margin: "$l" }}>
+    <ScrollView
+      sx={{ margin: "$l" }}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }>
       {isLoading ? (
         <ActivityIndicator size={"large"} color={"$primary"} />
       ) : data?.orders ? (

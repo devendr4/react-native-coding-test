@@ -17,8 +17,7 @@ const renderScene = SceneMap({
 });
 
 // this would ideally reside in an environment variable
-// can be changed for 789.json or 500.json to test the other caes
-export const API_URL = "https://finity-take-home.s3.amazonaws.com/789.json";
+export const API_URL = "https://finity-take-home.s3.amazonaws.com";
 
 const renderTabBar = (props: any) => (
   <TabBar
