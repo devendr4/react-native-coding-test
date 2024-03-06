@@ -11,7 +11,7 @@ import { User } from "@/types";
 export const OrdersRoute = () => {
   const { data, refetch, isLoading } = useQuery({
     queryKey: ["orders"],
-    queryFn: () => fetch(API_URL).then(res => res.json() as User),
+    queryFn: () => fetch(API_URL).then(res => res.json() as unknown as User),
   });
   return (
     <ScrollView sx={{ margin: "$l" }}>
