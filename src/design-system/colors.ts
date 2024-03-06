@@ -5,6 +5,7 @@ export const colors = {
   $white_40: "rgba(255, 255, 255, 0.4)",
   $white_20: "rgba(255, 255, 255, 0.2)",
   $white_10: "rgba(255, 255, 255, 0.1)",
+  $border: "#12121F1A",
 
   $text: "rgba(18, 18, 31, 1)",
   $text_2: "rgba(18, 18, 31, 0.50)",

@@ -1,32 +1,24 @@
-import { H1, Text } from "dripsy";
+import "dayjs/locale/es";
+
+import dayjs from "dayjs";
+import { H1 } from "dripsy";
 import { useState } from "react";
-import { SafeAreaView, useWindowDimensions, View } from "react-native";
+import { SafeAreaView, useWindowDimensions } from "react-native";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 
+import { OrdersRoute } from "@/routes/Orders";
+import { PaymentsRoute } from "@/routes/Payments";
+
 import { styles } from "./styles";
-
-const EmptyState = () => (
-  <View style={styles.container}>
-    <Text
-      sx={{
-        display: "flex",
-        textAlign: "center",
-        marginTop: "$2xl",
-        variant: "text.h2",
-      }}>
-      {"Good luck :)"}
-    </Text>
-  </View>
-);
-
-const OrdersRoute = () => <EmptyState />;
-
-const PaymentsRoute = () => <EmptyState />;
 
 const renderScene = SceneMap({
   orders: OrdersRoute,
   payments: PaymentsRoute,
 });
+
+// this would ideally reside in an environment variable
+// can be changed for 789.json or 500.json to test the other caes
+export const API_URL = "https://finity-take-home.s3.amazonaws.com/789.json";
 
 const renderTabBar = (props: any) => (
   <TabBar
@@ -41,6 +33,8 @@ const renderTabBar = (props: any) => (
 
 export default function HomeScreen() {
   const layout = useWindowDimensions();
+
+  dayjs.locale("es");
 
   const [index, setIndex] = useState(0);
   const [routes] = useState([

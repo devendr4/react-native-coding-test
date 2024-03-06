@@ -25,4 +25,18 @@ export const styles = Styles.create({
     flex: 1,
   },
   title: { marginTop: "$xl", marginLeft: "$xl", marginBottom: "$mm" },
+  cardTitle: {
+    variant: "text.h3",
+    fontFamily: defaultTheme.customFonts.ClashDisplay[700],
+  },
+  circleNumber: {
+    width: 40,
+    height: 40,
+    borderRadius: 100,
+    borderColor: "$primary",
+    borderWidth: 2,
+    backgroundColor: "transparent",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });

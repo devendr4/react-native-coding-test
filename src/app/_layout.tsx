@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { DripsyProvider } from "dripsy";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
@@ -10,6 +11,7 @@ import { useFonts } from "@/hooks/useFonts";
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const queryClient = new QueryClient();
   const { interFontsLoaded, clashDisplayFontsLoaded } = useFonts();
 
   const onLayoutRootView = useCallback(async () => {
@@ -24,9 +26,11 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider onLayout={onLayoutRootView}>
-      <DripsyProvider theme={theme}>
-        <BottomTabs />
-      </DripsyProvider>
+      <QueryClientProvider client={queryClient}>
+        <DripsyProvider theme={theme}>
+          <BottomTabs />
+        </DripsyProvider>
+      </QueryClientProvider>
     </SafeAreaProvider>
   );
 }
